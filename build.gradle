@@ -7,9 +7,11 @@ buildscript {
     }
     dependencies {
         classpath('org.springframework.boot:spring-boot-gradle-plugin:2.3.0.RELEASE')
+        classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
 
+apply plugin: 'docker'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -20,7 +22,7 @@ apply plugin: 'io.spring.dependency-management'
 group = 'com.healthcheck'
 
 
-bootJar {
+jar {
     baseName = 'healthcheck-application'
     version =  '0.1.0'
 }
@@ -50,5 +52,17 @@ dependencies {
     }
 
     testCompile group: 'junit', name: 'junit'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+  push = true
+  applicationName = jar.baseName
+  dockerfile = file('docker/Dockerfile')
+  doFirst {
+    copy {
+      from jar
+      into stageDir
+    }
+  }
 }
 
