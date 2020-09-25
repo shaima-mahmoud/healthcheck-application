@@ -57,7 +57,7 @@ public class CountriesControllerTests /* extends AbstractTest */ {
 
 	@Test
 	public void testGetCountryByCodeOK() throws Exception {
-		String uri = "/001";
+		String uri = "/AFG"; //001
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
@@ -65,7 +65,7 @@ public class CountriesControllerTests /* extends AbstractTest */ {
 
 	@Test
 	public void testGetCountryByCodeStatus() throws Exception {
-		String uri = "/002";
+		String uri = "/EGYPT"; //002
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		String message = mvcResult.getResponse().getContentAsString();
@@ -74,7 +74,7 @@ public class CountriesControllerTests /* extends AbstractTest */ {
 
 	@Test
 	public void testGetCountryByCodeMessage() throws Exception {
-		String uri = "/003";
+		String uri = "/EGYPT"; //003
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		String message = mvcResult.getResponse().getContentAsString();

@@ -31,10 +31,10 @@ public class CountryEntity {
 	 * (continent = 'South America'::text))) );
 	 */
 
+	
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long id;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
 	private String code;
 
 	private String name;

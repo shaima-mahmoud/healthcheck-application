@@ -3,7 +3,6 @@ package com.healthcheck.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -29,5 +28,9 @@ public class Country {
 	private Double life_expectancy;
 	
 	private String country_language;
+
+	public void setCountry_language(String language) {
+		this.country_language = language;
+	}
 
 }
