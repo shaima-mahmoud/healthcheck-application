@@ -53,17 +53,5 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.13'
     
     testCompile group: 'junit', name: 'junit'
+    
 }
-
-	/*task buildDocker(type: Docker, dependsOn: build) {
-	  push = true
-	  applicationName = jar.baseName
-	  dockerfile = file('docker/Dockerfile')
-	  doFirst {
-	    copy {
-	      from jar
-	      into stageDir
-	    }
-	  }
-	}
-	*/

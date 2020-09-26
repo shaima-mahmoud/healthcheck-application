@@ -16,8 +16,11 @@
 package com.healthcheck.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
+import javax.net.ssl.SSLEngineResult.Status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -34,15 +36,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class CountriesControllerTests /* extends AbstractTest */ {
+public class CountriesControllerTests {
 
 	@Autowired
 	protected MockMvc mvc;
@@ -54,30 +51,28 @@ public class CountriesControllerTests /* extends AbstractTest */ {
 	public void setUp() {
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
-
+	
+	
 	@Test
-	public void testGetCountryByCodeOK() throws Exception {
-		String uri = "/AFG"; //001
+	public void givenValidCountryCodeWhenGetCountryByCodeThenReturnCountryData() throws Exception {
+		// Arrange
+		String uri = "/AFG";
+		
+		// Act
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+		
+		// Assert
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
 	}
 
+	
 	@Test
-	public void testGetCountryByCodeStatus() throws Exception {
-		String uri = "/EGYPT"; //002
-		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
-		int status = mvcResult.getResponse().getStatus();
-		String message = mvcResult.getResponse().getContentAsString();
-		assertEquals(404, status);
-	}
-
-	@Test
-	public void testGetCountryByCodeMessage() throws Exception {
-		String uri = "/EGYPT"; //003
-		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
-		int status = mvcResult.getResponse().getStatus();
-		String message = mvcResult.getResponse().getContentAsString();
-		assertEquals(true, message.contains("INVALID_COUNTRY_CODE"));
-	}
+    public void givenInvalidCountryCodeWhenGetCountryByCodeThenReturnInvalidCountryCode() throws Exception {
+		mvc.perform(get("/AFG0"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$").value("INVALID_COUNTRY_CODE"));
+    }
+	
+	
 }
