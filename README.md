@@ -8,7 +8,7 @@ It should've been built using a CI tool somewhere on a server then to be downloa
 And when running the project, the repository should be cloned and then we should navigate to the project folder to start bulding the images.
 
 The project container starts from docker-compose.yml file that builds 2 images subsequently,
-the Data base image from the given git repository and the healthcheck-application.
+the Data base image from the script folder from the given git repository and the healthcheck-application.
 
 All steps are listed in the build instructions.
 
@@ -29,6 +29,10 @@ I could cover the OK, NOT_FOUND status, but not the SERVER_ERROR status.
 	git clone https://github.com/shaima-mahmoud/healthcheck-application
 	cd healthcheck-application
 	sudo docker-compose up --build
+	
+	open web browser and try:
+	http://0.0.0.0:8080/EGY
+	http://0.0.0.0:8080/EGYPT
 
 ## Import instructions
 To run the project,
