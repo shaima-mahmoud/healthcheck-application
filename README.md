@@ -30,9 +30,10 @@ I could cover the OK, NOT_FOUND status, but not the SERVER_ERROR status.
 	cd healthcheck-application
 	sudo docker-compose up --build
 	
-	open web browser and try:
-	http://0.0.0.0:8080/EGY
-	http://0.0.0.0:8080/EGYPT
+	curl http://0.0.0.0:8080/AFG
+	Or
+	open web browser and try: http://0.0.0.0:8080/EGY to get country data
+	http://0.0.0.0:8080/EGYPT to get INVALID_COUNTRY_CODE
 
 ## Import instructions
 To run the project,
