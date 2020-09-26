@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # JAVA healthcheck-application 
 A spring boot rest application built with Gradle.
 The project source code and build files are committed to the public gitHub repository: https://github.com/shaima-mahmoud/healthcheck-application
