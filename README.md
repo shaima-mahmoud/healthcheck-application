@@ -42,4 +42,3 @@ Please note that, all tools should be pre installed on the host.
 
 * Linux OS
 * Docker
->>>>>>> 
