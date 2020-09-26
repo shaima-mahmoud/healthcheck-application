@@ -28,7 +28,6 @@ I could cover the OK, NOT_FOUND status, but not the SERVER_ERROR status.
 	
 	git clone https://github.com/shaima-mahmoud/healthcheck-application
 	cd healthcheck-application
-	sudo docker rm $(sudo docker ps -a -q)
 	sudo docker-compose up --build
 
 ## Import instructions
