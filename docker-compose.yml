@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+  app:
+    container_name: healthcheck
+    image: healthcheck
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbpostgresql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://healthcheck-db:5432/world-db  
+  dbpostgresql:
+    image: postgres
+    container_name: healthcheck-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=world123
+      - POSTGRES_USER=world
+      - POSTGRES_DB=world-db
+    volumes:
+      - ./scripts/world.sql:/docker-entrypoint-initdb.d/world.sql
+    restart: always 
